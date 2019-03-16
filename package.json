@@ -2,7 +2,7 @@
   "name": "web_app_template",
   "version": "1.0.0",
   "description": "Web app template with basic stuff",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "node server"
   },

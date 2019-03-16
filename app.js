@@ -10,7 +10,7 @@ const bodyParser = require('body-parser')
 const logger = require('./utils/logger')
 const request_logger = require('./utils/request_logger')
 
-
+//Load routes
 const index = require('./routes/index')
 const users = require('./routes/users')
 
