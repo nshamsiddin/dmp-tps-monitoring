@@ -1,0 +1,30 @@
+{
+  "name": "web_app_template",
+  "version": "1.0.0",
+  "description": "Web app template with basic stuff",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nshamsiddin/web_app_template.git"
+  },
+  "author": "Shamsiddin Nabiev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nshamsiddin/web_app_template/issues"
+  },
+  "homepage": "https://github.com/nshamsiddin/web_app_template#readme",
+  "dependencies": {
+    "@types/node": "^11.11.3",
+    "body-parser": "^1.18.3",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "http-errors": "^1.7.2",
+    "morgan": "^1.9.1",
+    "pug": "^2.0.3",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^3.8.0"
+  }
+}
