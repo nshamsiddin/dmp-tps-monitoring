@@ -1,5 +1,4 @@
-const config = require('../config')
-const tools = require('./tools')
+const config = require('../../config')
 const path = require('path')
 const winston = require('winston')
 const { combine, timestamp, label, prettyPrint } = winston.format
@@ -8,8 +7,8 @@ const logger = new (winston.createLogger)({
     level: config.logging.level,
     format: combine(
         timestamp(),
-        // prettyPrint()
         winston.format.json()
+        // prettyPrint()
     ),
     colorize: true,
     transports: [new winston.transports.Console()]
