@@ -31,35 +31,34 @@ app.use(request_logger)
 
 //Body-parser middleware
 app.use(express.urlencoded({ extended: true }))
-
-//Set public folder
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.json())
 
 //Flash message middleware
 app.use(flash())
 app.use((req, res, next) => {
-    res.locals.messages = messages(req, res);
+    res.locals.messages = messages(req, res)
+    res.locals.app_title = config.app_name
     next()
 })
 
 //Session middleware
 app.use(session({
     name: config.session.name,
-    cookie: {
-        maxAge: config.session.expires,
-        sameSite: true,
+    // cookie: {
+        // maxAge: config.session.expires,
+        // sameSite: true,
         // IN PROD should be uncommented
         // secure: true
-    },
+    // },
     resave: config.session.resave,
     saveUninitialized: false,
     secret: config.session.secret
 }))
 
-app.get('*', (req, res, next) => {
-    res.locals.app_title = config.app_name
-    next()
-})
+// app.get('*', (req, res, next) => {
+//     res.locals.app_title = config.app_name
+//     next()
+// })
 
 //Routes
 app.use('/', index)
