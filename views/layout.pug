@@ -34,7 +34,7 @@ html
                                 a.nav-link(href='/users/logout') Logout 
         .container.mt-3
             .messages-container
-                != messages('message', locals)
+                != messages('partials/message', locals)
                 if errors
                     each error, i in errors
                         div(class='alert alert-danger') #{error.msg}
