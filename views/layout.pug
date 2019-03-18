@@ -32,6 +32,11 @@ html
                         ul.navbar-nav.mr-auto
                             li.nav-item
                                 a.nav-link(href='/users/logout') Logout 
-        
+        .container.mt-3
+            .messages-container
+                != messages('message', locals)
+                if errors
+                    each error, i in errors
+                        div(class='alert alert-danger') #{error.msg}
         .container
             block content

@@ -4,6 +4,8 @@ const mongodb = require('./src/utils/mongodb')
 const express = require('express')
 const session = require('express-session')
 const path = require('path')
+const messages = require('express-messages')
+const flash = require('connect-flash')
 
 //Loggers
 const logger = require('./src/utils/logger')
@@ -32,6 +34,13 @@ app.use(express.urlencoded({ extended: true }))
 
 //Set public folder
 app.use(express.static(path.join(__dirname, 'public')))
+
+//Flash message middleware
+app.use(flash())
+app.use((req, res, next) => {
+    res.locals.messages = messages(req, res);
+    next()
+})
 
 //Session middleware
 app.use(session({
