@@ -1,6 +1,7 @@
 const config = require('./config')
 const environment = config.environment
 const mongodb = require('./src/utils/mongodb')
+const passport = require('passport')
 const express = require('express')
 const session = require('express-session')
 const path = require('path')
@@ -33,6 +34,20 @@ app.use(request_logger)
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
+//Session middleware
+app.use(session({
+    name: config.session.name,
+    // cookie: {
+    // maxAge: config.session.expires,
+    // sameSite: true,
+    // IN PROD should be uncommented
+    // secure: true
+    // },
+    resave: config.session.resave,
+    saveUninitialized: false,
+    secret: config.session.secret
+}))
+
 //Flash message middleware
 app.use(flash())
 app.use((req, res, next) => {
@@ -41,42 +56,31 @@ app.use((req, res, next) => {
     next()
 })
 
-//Session middleware
-app.use(session({
-    name: config.session.name,
-    // cookie: {
-        // maxAge: config.session.expires,
-        // sameSite: true,
-        // IN PROD should be uncommented
-        // secure: true
-    // },
-    resave: config.session.resave,
-    saveUninitialized: false,
-    secret: config.session.secret
-}))
+//Passport config
+require('./src/utils/auth/passport')(passport)
 
-// app.get('*', (req, res, next) => {
-//     res.locals.app_title = config.app_name
-//     next()
-// })
+//Passport Middleware
+app.use(passport.initialize())
+app.use(passport.session())
 
 //Routes
 app.use('/', index)
 app.use('/users', users)
 app.use('/roles', roles)
 
-// app.use((req, res, next) => {
-//     next(createError(404))
-// })
-
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
     // set locals, only providing error in development
     res.locals.message = err.message
     res.locals.error = req.app.get('env') === 'development' ? err : {}
     // render the error page
     res.status(err.status || 500)
     res.render('error')
+})
+
+app.get('*', (req, res, next) => {
+    res.locals.user = req.user
+    next()
 })
 
 const port = config.server.port

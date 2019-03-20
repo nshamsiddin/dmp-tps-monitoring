@@ -7,7 +7,7 @@
     border-radius: 0.3rem
 }
 
-button{
+button .standard-submit-btn{
     width: 100%
 }
 

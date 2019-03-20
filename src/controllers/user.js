@@ -8,7 +8,21 @@ exports.get = () =>
         .catch((err) => {
             logger.error(`Error retrieving users: ${err}`)
         })
-        
+
+exports.getByUsername = (username) =>
+    Model.User
+        .findOne({ username: username })
+        .catch((err) => {
+            logger.error(`Error retrieving user by username: ${err}`)
+        })
+
+exports.getById = (id) =>
+    Model.User
+        .findById(id)
+        .catch((err) => {
+            logger.error(`Error retrieving user by id: ${err}`)
+        })
+
 exports.create = user =>
     new Model.User(user)
         .save()
