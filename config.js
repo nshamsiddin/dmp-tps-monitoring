@@ -1,7 +1,6 @@
 require('dotenv').config()
 
-const environment = process.env.NODE_ENV || 'development'
-
+// const environment = process.env.NODE_ENV || 'development'
 module.exports = {
     environment: process.env.NODE_ENV || 'development',
     logging: {
@@ -20,5 +19,19 @@ module.exports = {
     },
     mongodb: {
         url: process.env.MONGODB_URL || 'mongodb://localhost:27017/test'
+    },
+    access: {
+        admin: {
+            create: '*',
+            read: '*',
+            update: '*',
+            delete: '*'
+        },
+        user: {
+            create: '*',
+            read: '*',
+            update: 'own',
+            delete: 'own'
+        }
     }
 }

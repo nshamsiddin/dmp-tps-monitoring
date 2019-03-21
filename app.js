@@ -1,16 +1,17 @@
 const config = require('./config')
-
-const logger = require('./src/utils/logger')
-const request_logger = require('./src/utils/request_logger')
-
 const environment = config.environment
-const mongodb = require('./src/utils/mongodb')
+
+//Modules
 const passport = require('passport')
 const express = require('express')
 const session = require('express-session')
 const path = require('path')
 const messages = require('express-messages')
 const flash = require('connect-flash')
+//Custom modules
+const logger = require('./src/utils/logger')
+const mongodb = require('./src/utils/mongodb')
+const request_logger = require('./src/utils/request_logger')
 
 const app = express()
 
@@ -51,17 +52,12 @@ app.get('*', (req, res, next) => {
     next()
 })
 
-app.get('/', (req, res) => {
-    res.redirect('/requests')
-})
-
 const index = require('./src/routes/index')
 const users = require('./src/routes/users')
 const roles = require('./src/routes/roles')
 app.use('/', index)
 app.use('/users', users)
 app.use('/roles', roles)
-
 
 const port = config.server.port
 app.set('port', port)
