@@ -10,8 +10,9 @@ module.exports = (passport) => {
         new LocalStrategy((username, password, done) => {
             User.getByUsername(username)
                 .then(user => {
-                    if (!user)
+                    if (!user){
                         return done(null, false, { type: 'danger', message: 'No such user' })
+                    }
                     return done(null, user)
                 })
         })
