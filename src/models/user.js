@@ -3,8 +3,9 @@ const db = require('../utils/mongodb')
 
 // User Model
 const UserSchema = new db.mongoose.Schema({
-    username: String,
-    name: String,
+    username: {type: String, required: true},
+    access: {type: String, required: true},
+    name: {type: String, required: true},
     email: String,
     password: String,
     created: { type: Date, default: Date.now },
