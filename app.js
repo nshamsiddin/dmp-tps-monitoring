@@ -8,6 +8,7 @@ const session = require('express-session')
 const path = require('path')
 const messages = require('express-messages')
 const flash = require('connect-flash')
+
 //Custom modules
 const logger = require('./src/utils/logger')
 const mongodb = require('./src/utils/mongodb')
@@ -47,7 +48,7 @@ app.use(passport.session())
 app.get('*', (req, res, next) => {
     res.locals.user = req.user || null
     if (res.locals.user) {
-        res.locals.access = res.locals.user.access
+        res.locals.group = res.locals.user.group
     }
     next()
 })
