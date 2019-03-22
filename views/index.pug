@@ -1,5 +1,10 @@
 extends layout
-
+block head
+	link(rel='stylesheet', href='/libs/dist/Chart.css')
+	script(src='/libs/dist/Chart.js')
+	script(src='/scripts/test.js')
 block content
-	h1= title
-	p Welcome to #{title}
+	h1= app_title
+	.chart-container
+		canvas#myChart
+

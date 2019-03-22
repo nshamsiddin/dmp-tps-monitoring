@@ -3,10 +3,14 @@ block head
 	link(rel='stylesheet', href='/stylesheets/standard-forms.css')
 block content
 	.container.login-form-container
-		h2.mb-5 New user
-		form(action='/users/login', method='POST')
-			.form-group.mb
-				input#input-username.form-control(name='username', type='text', aria-describedby='usernameHelp', placeholder='Enter username')
+		h2.form-title= title
+		form(action='/users/add', method='POST')
 			.form-group
-				select#select-role.form-control
-			button.mt-5.btn.btn-dark(type='submit') Submit
+				input#input-username.form-control(name='username', type='text', placeholder='Enter username')
+			.form-group
+				input#input-name.form-control(name='name', type='text', placeholder='Enter name')
+			.form-group
+				select#select-group.form-control(name='group')
+					option(value='user', selected=true) User
+					option(value='admin') Administrator
+			button.btn.btn-dark.standard-submit-btn(type='submit') Submit
