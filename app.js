@@ -56,9 +56,13 @@ app.get('*', (req, res, next) => {
 const index = require('./src/routes/index')
 const users = require('./src/routes/users')
 const roles = require('./src/routes/roles')
+const dashboard = require('./src/routes/dashboard')
+const api = require('./src/routes/api')
 app.use('/', index)
 app.use('/users', users)
 app.use('/roles', roles)
+app.use('/dashboard', dashboard)
+app.use('/api', api)
 
 const port = config.server.port
 app.set('port', port)
